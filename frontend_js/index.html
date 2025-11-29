@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlvinPDF Chatbox</title>
+
+    <link rel="icon" type="image/png" href="img/Alvin_logo.png" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #app {
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Đảm bảo nội dung chính không bị khuất sau header/footer */
+        #chat-container {
+            margin-top: 64px;
+        }
+
+        /* BẮT BUỘC: Đảm bảo thẻ <a> không bị gạch chân và dùng màu chữ đúng */
+        .header-link {
+            text-decoration: none;
+            /* Xóa gạch chân */
+            color: inherit;
+            /* Kế thừa màu chữ từ cha */
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+
+    <div id="app" class="flex flex-col h-full w-screen font-sans">
+
+        <header
+            class="header fixed top-0 left-0 right-0 z-10 bg-white border-b border-gray-100 p-4 flex justify-between items-center w-full max-w-5xl mx-auto">
+
+            <div class="flex items-center space-x-2">
+                <a href="#" onclick="window.location.reload(true); return false;"
+                    class="header-link flex items-center space-x-2 cursor-pointer">
+                    <img src="img/Alvin_logo.png" alt="AlvinPDF Logo" class="h-15 w-16" />
+                    <h1 class="text-xl font-medium text-gray-800">AlvinPDF Chatbot - Dương Hữu Đan</h1>
+                </a>
+            </div>
+
+            <div id="file-status" class="flex items-center space-x-4">
+                <span class="text-gray-500 text-sm">Chưa có tệp</span>
+            </div>
+        </header>
+
+        <main id="chat-container" class="flex-1 overflow-y-auto pt-[100px] pb-32 px-4 md:px-6 w-full max-w-5xl mx-auto">
+
+            <div id="welcome-message" class="flex flex-col items-center justify-center h-full text-center">
+                <h2 class="text-6xl font-light text-blue-500 mb-4 mt-32">Chào bạn!👋</h2>
+                <p class="text-gray-500 text-xl font-light">Tôi là Alvin, một Trợ lý RAG chuyên dụng.</p>
+                <p class="text-gray-500 text-xl font-light">Tôi có thể giúp bạn trò chuyện và trích xuất thông tin trực
+                    tiếp từ các tệp PDF mà bạn tải lên.</p>
+            </div>
+
+            <div id="messages-area" class="space-y-6">
+            </div>
+
+            <div id="chat-end"></div>
+        </main>
+
+        <footer class="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-2xl border-t border-gray-100">
+            <div class="w-full max-w-3xl mx-auto">
+                <p id="footer-message" class="text-center text-gray-500 mb-2">
+                    Để bắt đầu, hãy tải lên một tệp PDF.
+                </p>
+
+                <form id="chat-form" class="flex items-center bg-gray-100 rounded-3xl p-1.5 shadow-md">
+                    <label for="pdf-upload"
+                        class="p-2 rounded-full cursor-pointer transition text-gray-700 hover:bg-gray-200"
+                        title="Tải file PDF lên">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-upload">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <input id="pdf-upload" type="file" accept=".pdf" class="hidden" />
+                    </label>
+
+                    <input type="text" id="chat-input" placeholder="Vui lòng tải file PDF lên để bắt đầu"
+                        class="flex-1 p-2 bg-transparent text-gray-800 focus:outline-none" disabled />
+
+                    <button type="submit" id="send-button" disabled
+                        class="p-2.5 rounded-full transition duration-150 ease-in-out w-10 h-10 flex items-center justify-center bg-gray-300 text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-send">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </footer>
+
+        <script src="script.js"></script>
+</body>
+
+</html>
